@@ -2,66 +2,71 @@
 
 `docker login`
 
-`docker pull [Image]`
+`docker pull [Image]` - pull image from docker hub
 
-`docker search [image]`
+`docker search [image]` - search image in docker hub
 
-`docker push <docker_username>/<docker_image_name>`
+`docker build -t [imagename] [dockerfile_path]` Build image from Dockerfile
 
-`docker run -p [LOCALHOSTPORT]:[ContainerPORT] image:Release_Version`
+`docker push <docker_username>/<docker_image_name>:<tag>` - push image to docker hub
 
-`docker run -p [LOCALHOSTPORT]:[ContainerPORT] -e [envName]=[envValue] image:Release_Version`
+`docker run -p [LOCALHOSTPORT]:[ContainerPORT] image:Release_Version` - run container 
 
-`docker run -d -p [LOCALHOSTPORT]:[ContainerPORT] --name [nameForContainer] --network [networkName] image:Release_Version` # run container in detached mode
+`docker run -p [LOCALHOSTPORT]:[ContainerPORT] -e [envName]=[envValue] image:Release_Version` - run container with environment variables
 
-`docker run -v [volume/hostlocalpath]:[containerdatapath] [image]`
+`docker run -d -p [LOCALHOSTPORT]:[ContainerPORT] --name [nameForContainer] --network [networkName] image:Release_Version` - run container in detached mode
 
-``
+`docker run -v [volume/hostlocalpath]:[containerdatapath] [image]` - mount volume to container
 
-> -p == --publish, -d=detachmode, --name = with this tag we can assign own name to container & it should be unique
 
-`docker logs [ContainerId]`
 
-`docker logs -f [ContainerId]`
+`docker logs [ContainerIdOrName]` - display logs
 
-==> -f==full
+`docker logs -f [ContainerIdOrName]` - full logs
 
-`docker images` # show the list of docker images in system
+
+`docker images` - show the list of docker images in system
 
 `docker image history [ImageName]:[ReleaseVersion]`
 
-`docker image history [imageId]`            #show layers of image
+`docker image history [imageId]` - show layers of image
 
-`docker image inspect  [imageId]`          #show details of image
+`docker image inspect  [imageId]` - show details of image
 
-`docker image remove [imageName/Id]`
+`docker image remove [imageName/Id]` or `docker image remove [imageName]:[Releaseversion]` or `docker rmi [imageName]:[Releaseversion]`
 
-`docker image remove [imageName]:[Releaseversion]`
+`docker tag source_image:tag new_image:tag` - rename the docker image
 
+`docker save -o image_name.tar image_name:tag` - save image to an tar archive
+
+docker load -i image_name.tar - load image from an tar archive
+
+docker image prune
 ----
 
-`docker container ls`          # show the list of running containers
+`docker container ls` - show the list of running containers
 
-`docker container ls -a`         # show the list of all containers which are even exited
+`docker container ls -a` - show the list of all containers which are even exited
 
-`docker container stop [ContainerId]`            #shutdown the container
+`docker container stop [ContainerName_or_Id]` - shutdown the container
 
-`docker container start [ContainerId]`           # Start the stopped container
+`docker container start [ContainerName_or_Id]` - Start the stopped container
 
-`docker container kill [ContainerId]`           #immediate kill
+`docker container kill [ContainerName_or_Id]` - immediate kill
 
-`docker container rm [ContainerId]`
+`docker container rm [ContainerName_or_Id]` - remove the container
 
-`docker container pause  [ContainerId]`
+`docker container pause  [ContainerName_or_Id]` - pause a running container
 
-`docker container unpause [ContainerId]`
+`docker container unpause [ContainerName_or_Id]`
 
-`docker container inspect  [ContainerId]`
+`docker container inspect  [ContainerName_or_Id]`
 
-`docker container stats [ContainerId]`
+`docker container stats [ContainerName_or_Id]`
 
-`docker container prune`              # delete all stopped containers
+`docker container prune` - delete all stopped containers
 
+`docker logs container_name_or_id`
 ---
 
 
@@ -80,32 +85,39 @@
 ---
 `docker network ls`                         # show the list of networks
 
-`docker network inspect [networkName]`
+`docker network inspect [networkName]` - Inspect details of a network
 
-`docker network create [networkName]` 
+`docker network create [networkName]`  - Create a user-defined bridge network
 
 `docker network prune`
 
 `docker network rm [networkName]`
+docker network connect network_name container_name - Connect a container to a network
+
+docker network disconnect network_name container_name
 
 ---
 
-`docker volume ls`
+`docker volume ls` - list all volumes
 
 `docker volume prune`
 
 `docker volume create`
 
-`docker volume create [volumeName]`
+`docker volume create [volumeName]` - create a named volume
 
-`docker volume rm [VolumeName]`
+`docker volume rm [VolumeName]` - remove volume
 
-`docker volume inspect [volumeName]`
+`docker volume inspect [volumeName]` - Inspect details of a volume
+
+
+`docker cp local_file_or_directory container_name:/path/in/container` - Copy files between a container and a volume
+
 
 ---
 `docker compose --version`
 
-`docker compose up`
+`docker compose up` - Create and start containers defined in a docker- compose.yml file
 
 `docker compose up -d`  #detach mode
 
@@ -117,13 +129,15 @@
 
 `docker compose down`   # stop the containers & also remove the containers
 
+`docker compose build`
+
 `docker compose events`
 
 `docker compose config`   # Show the configuration
 
 `docker compose images`    # list the images used by compose
 
-`docker compose ps                # list down the containers
+`docker compose ps`                # list down the containers
 
 `docker compose top` #Display the running processes of a container
 
@@ -133,6 +147,11 @@
 
 `docker compose stop`
 
-`docker compose logs`
+`docker compose logs` - view logs of services
+
+
+`docker compose up -d --scale service_name=number_of_containers` - Scale services to a specific number of containers
+
+`docker compose run service_name command` - run a one time command in service
 
 ---
