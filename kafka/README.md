@@ -33,3 +33,6 @@
 `wget https://downloads.apache.org/kafka/3.3.1/kafka_2.12-3.3.1.tgz`
 
 `tar -xvf kafka_2.12-3.3.1.tgz`
+
+### Python
+`pip install kafka-python`

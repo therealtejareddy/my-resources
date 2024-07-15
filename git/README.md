@@ -73,21 +73,25 @@ ___
 `git branch --contains <commit_hash>`
 
 ### Remote URLs
-`git remote add <shortcut> <url>`
+`git remote add <shortcut> <url>` - add remote url
 
-`git remote show <remote>`
+`git remote show <remote>` - show all remote urls
 
 `git remote -v`   // show all the remote urls linked to repo
 
 ### Clone
-`git clone <github_url>`
+`git clone <github_url>` - clone repo from url
 
 `git clone --branch <branch_name> --single-branch <url> [directory]`
 
 ### Push
-`git push <url> <branchName>`
+`git push <url> <branchName>` - 
 
 `git push <url> <branchName> -f ` forced push
 
-`git push <origin> --delete <branchName>`
+`git push <url> --delete <branchName>` - delete branch in repo
 
+### Pull
+`git pull origin <branchName> --no-ff`
+
+`git pull origin`
